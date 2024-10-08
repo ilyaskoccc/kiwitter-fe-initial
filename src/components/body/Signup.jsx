@@ -1,4 +1,4 @@
-import AuthLayout from "./AuthLayout";
+import AuthLayout from "../layout/AuthLayout";
 import { useForm } from "react-hook-form";
 
 export default function Signup() {

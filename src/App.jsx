@@ -1,12 +1,15 @@
 import "./App.css";
 import { Switch, Route } from "react-router-dom";
-import PageLayout from "./PageLayout";
-import Login from "./Login";
-import Signup from "./Signup";
+import PageLayout from "./components/layout/PageLayout";
+import Login from "./components/body/Login";
+import Signup from "./components/body/Signup";
+import Header from "./components/headers/Header";
+import Footer from "./components/footer/Footer";
 
 function App() {
   return (
-    <div>
+    <div className="relative">
+      <Header />
       <Switch>
         <Route path="/login">
           <Login />
@@ -16,7 +19,6 @@ function App() {
         </Route>
 
         <Route path="/" exact>
-          {/* /?variant=most_liked */}
           <PageLayout>Home</PageLayout>
         </Route>
         <Route path="/profile/:nick">
@@ -26,6 +28,8 @@ function App() {
           <PageLayout>Twit detail</PageLayout>
         </Route>
       </Switch>
+
+      <Footer />
     </div>
   );
 }
