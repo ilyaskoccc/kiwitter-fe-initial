@@ -59,13 +59,14 @@ export default function Signup() {
       <form onSubmit={handleSubmit(handleSignup)}>
         <div className="pt-4">
           <div className="flex justify-between gap-2 items-baseline pb-1">
-            <label htmlFor="nickname ">İsim Soyisim</label>
+            <label htmlFor="name">İsim Soyisim</label>
             <span className="text-sm font-medium text-red-600">
               {errors.name && errors.name.message.toString()}
             </span>
           </div>
           <input
             type="text"
+            id="name"
             className="w-full h-10 px-2 border rounded-md border-gray-300"
             {...register("name", { required: "Bu alan zorunlu" })}
           />
@@ -73,13 +74,14 @@ export default function Signup() {
 
         <div className="pt-4">
           <div className="flex justify-between gap-2 items-baseline pb-1">
-            <label htmlFor="nickname ">Kullanıcı adı</label>
+            <label htmlFor="nickname">Kullanıcı adı</label>
             <span className="text-sm font-medium text-red-600">
               {errors.nickname && errors.nickname.message.toString()}
             </span>
           </div>
           <input
             type="text"
+            id="nickname"
             className="w-full h-10 px-2 border rounded-md border-gray-300"
             {...register("nickname", { required: "Bu alan zorunlu" })}
           />
@@ -87,13 +89,14 @@ export default function Signup() {
 
         <div className="pt-4">
           <div className="flex justify-between gap-2 items-baseline pb-1">
-            <label htmlFor="nickname">Email</label>
+            <label htmlFor="email">Email</label>
             <span className="text-sm font-medium text-red-600">
               {errors.email && errors.email.message.toString()}
             </span>
           </div>
           <input
             type="email"
+            id="email"
             className="w-full h-10 px-2 border rounded-md border-gray-300"
             {...register("email", {
               required: "Bu alan zorunlu",
@@ -114,6 +117,7 @@ export default function Signup() {
           </div>
           <input
             type="password"
+            id="password"
             className="w-full h-10 px-2 border rounded-md border-gray-300"
             {...register("password", { required: "Bu alan zorunlu" })}
           />

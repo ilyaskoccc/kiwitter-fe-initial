@@ -77,13 +77,14 @@ export default function Login() {
       <form onSubmit={handleSubmit(handleLogin)}>
         <div className="pt-4">
           <div className="flex justify-between gap-2 items-baseline pb-1">
-            <label htmlFor="nickname ">Kullanıcı adı</label>
+            <label htmlFor="nickname">Kullanıcı adı</label>
             <span className="text-sm font-medium text-red-600">
               {errors.nickname && errors.nickname.message.toString()}
             </span>
           </div>
           <input
             type="text"
+            id="nickname"
             className="w-full h-10 px-2 border rounded-md border-gray-300"
             {...register("nickname", { required: "Bu alan zorunlu" })}
           />
@@ -98,6 +99,7 @@ export default function Login() {
           </div>
           <input
             type="password"
+            id="password"
             className="w-full h-10 px-2 border rounded-md border-gray-300"
             {...register("password", { required: "Bu alan zorunlu" })}
           />
