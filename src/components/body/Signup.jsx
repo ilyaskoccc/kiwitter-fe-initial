@@ -17,7 +17,7 @@ export default function Signup() {
   return (
     <AuthLayout>
       <h1 className="text-3xl text-center font-semibold tracking-tighter text-lime-700">
-        Hoş Geldin!
+        KAYIT OL
       </h1>
       <form onSubmit={handleSubmit(handleSignup)}>
         <div className="pt-4">
@@ -86,7 +86,7 @@ export default function Signup() {
             type="submit"
             className="h-12 text-center block w-full rounded-lg bg-lime-700 text-white font-bold "
           >
-            GİRİŞ
+            KAYIT OL
           </button>
         </div>
       </form>

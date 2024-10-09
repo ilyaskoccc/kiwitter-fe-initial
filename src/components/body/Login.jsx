@@ -23,7 +23,7 @@ export default function Login() {
   return (
     <AuthLayout>
       <h1 className="text-3xl text-center font-semibold tracking-tighter text-lime-700">
-        Hoş Geldin!
+        GİRİŞ YAP
       </h1>
       <form onSubmit={handleSubmit(handleLogin)}>
         <div className="pt-4">
