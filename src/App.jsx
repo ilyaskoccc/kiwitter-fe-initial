@@ -7,6 +7,8 @@ import Header from "./components/headers/Header";
 import Footer from "./components/footer/Footer";
 import { UserContextProvider } from "./context/UserContextProvider";
 import PrivateRoute from "./private/PrivateRoute";
+import UserTwits from "./components/body/UserTwits";
+import HomePage from "./components/body/HomePage";
 
 function App() {
   return (
@@ -22,10 +24,10 @@ function App() {
           </Route>
 
           <Route path="/" exact>
-            <PageLayout>Home</PageLayout>
+            <HomePage />
           </Route>
-          <Route path="/profile/:nick">
-            <PageLayout>Profile page</PageLayout>
+          <Route path="/profile/:nickname">
+            <UserTwits />
           </Route>
           <PrivateRoute path="/detail/:twitId">
             <PageLayout>Twit detail</PageLayout>

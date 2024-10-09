@@ -25,7 +25,7 @@ export default function Header() {
   };
 
   return (
-    <div className="container mx-auto sticky top-0 bg-white shadow-md">
+    <div className="container mx-auto top-0 bg-white shadow-md">
       <header className="mx-auto p-6">
         <nav className="flex justify-around items-center">
           <div className="w-16 h-16">
@@ -40,7 +40,7 @@ export default function Header() {
           <div className="flex gap-5 items-center">
             {user ? (
               <span className="text-lg font-bold text-lime-800">
-                My Account
+                <Link to={`/profile/${user.nickname}`}>My Account</Link>
               </span>
             ) : (
               <Link to="/signup">
