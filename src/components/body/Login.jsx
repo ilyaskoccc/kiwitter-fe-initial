@@ -1,12 +1,15 @@
-import queryString from "query-string";
+// import queryString from "query-string";
 import AuthLayout from "../layout/AuthLayout";
-import { useLocation } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import axios from "axios";
+import { jwtDecode } from "jwt-decode";
+import { toast } from "react-toastify";
 
 export default function Login() {
-  const { search } = useLocation();
-  const values = queryString.parse(search);
-  console.log(values.expiresIn, "***");
+  // const { search } = useLocation();
+  // const values = queryString.parse(search);
+  // console.log(values.expiresIn, "***");
 
   const {
     register,
@@ -17,13 +20,46 @@ export default function Login() {
   });
 
   function handleLogin(data) {
-    console.log(data, "---");
+    axios({
+      method: "post",
+      url: "https://kiwitter-node-77f5acb427c1.herokuapp.com/login",
+      data: data,
+    })
+      .then((response) => {
+        const token = response.data.token;
+        const decoded = jwtDecode(token);
+        console.log(decoded, "*****");
+        localStorage.setItem("kiwitter_user", token);
+
+        toast.success(`Welcome ${decoded.nickname}!`, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      })
+      .catch(() =>
+        toast.error("No Such User Found!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        })
+      );
   }
 
   return (
     <AuthLayout>
       <h1 className="text-3xl text-center font-semibold tracking-tighter text-lime-700">
-        GİRİŞ YAP
+        Welcome!
       </h1>
       <form onSubmit={handleSubmit(handleLogin)}>
         <div className="pt-4">
