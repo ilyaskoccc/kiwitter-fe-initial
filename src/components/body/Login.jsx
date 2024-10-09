@@ -5,11 +5,17 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import { toast } from "react-toastify";
+import { useContext } from "react";
+import { UserContext } from "../../context/UserContextProvider";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function Login() {
   // const { search } = useLocation();
   // const values = queryString.parse(search);
   // console.log(values.expiresIn, "***");
+
+  const { setUser } = useContext(UserContext);
+  let history = useHistory();
 
   const {
     register,
@@ -27,20 +33,27 @@ export default function Login() {
     })
       .then((response) => {
         const token = response.data.token;
-        const decoded = jwtDecode(token);
-        console.log(decoded, "*****");
+        const decodedUser = jwtDecode(token);
+        setUser(decodedUser);
         localStorage.setItem("kiwitter_user", token);
 
-        toast.success(`Welcome ${decoded.nickname}!`, {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
+        toast.success(
+          `Welcome ${decodedUser.nickname}! I redirect to the home page.`,
+          {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          }
+        );
+
+        setTimeout(() => {
+          history.push("/");
+        }, 2000);
       })
       .catch(() =>
         toast.error("No Such User Found!", {

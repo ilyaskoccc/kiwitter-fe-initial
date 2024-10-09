@@ -5,31 +5,35 @@ import Login from "./components/body/Login";
 import Signup from "./components/body/Signup";
 import Header from "./components/headers/Header";
 import Footer from "./components/footer/Footer";
+import { UserContextProvider } from "./context/UserContextProvider";
+import PrivateRoute from "./private/PrivateRoute";
 
 function App() {
   return (
     <div className="relative">
-      <Header />
-      <Switch>
-        <Route path="/login">
-          <Login />
-        </Route>
-        <Route path="/signup">
-          <Signup />
-        </Route>
+      <UserContextProvider>
+        <Header />
+        <Switch>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/signup">
+            <Signup />
+          </Route>
 
-        <Route path="/" exact>
-          <PageLayout>Home</PageLayout>
-        </Route>
-        <Route path="/profile/:nick">
-          <PageLayout>Profile page</PageLayout>
-        </Route>
-        <Route path="/detail/:twitId">
-          <PageLayout>Twit detail</PageLayout>
-        </Route>
-      </Switch>
+          <Route path="/" exact>
+            <PageLayout>Home</PageLayout>
+          </Route>
+          <Route path="/profile/:nick">
+            <PageLayout>Profile page</PageLayout>
+          </Route>
+          <PrivateRoute path="/detail/:twitId">
+            <PageLayout>Twit detail</PageLayout>
+          </PrivateRoute>
+        </Switch>
 
-      <Footer />
+        <Footer />
+      </UserContextProvider>
     </div>
   );
 }
