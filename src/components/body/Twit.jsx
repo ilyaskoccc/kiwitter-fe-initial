@@ -4,8 +4,44 @@ import {
   ChatTeardropText,
   DotsThreeOutline,
 } from "@phosphor-icons/react";
+import { UserContext } from "../../context/UserContextProvider";
+import { useContext } from "react";
+import axios from "axios";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export default function Twit({ item, twitType = "main" }) {
+  const { user } = useContext(UserContext);
+
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation({
+    mutationFn: (favTwit) => {
+      return axios.post(
+        `https://kiwitter-node-77f5acb427c1.herokuapp.com/twits/${item.id}/likes`,
+        favTwit,
+        {
+          headers: {
+            Authorization: localStorage.getItem("kiwitter_user"),
+          },
+        }
+      );
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["mainPageTwits"],
+      });
+    },
+  });
+
+  // twitType === "main" ? ["mainPageTwits"] : ["twitDetail", String(item.id)]  ["userTwits", item.nickname]
+  // bununda gelmesi gerekiyor.
+
+  const handleFav = () => {
+    const favTwit = {
+      user_id: String(user.id),
+    };
+    mutation.mutate(favTwit);
+  };
   return (
     <div
       key={item.author_id}
@@ -23,7 +59,10 @@ export default function Twit({ item, twitType = "main" }) {
         </Link>
         <p className="mt-1">{item.content}</p>
         <div className="flex gap-2 mt-2 items-center">
-          <button className="flex gap-1 text-sm items-center bg-gray-100 border border-gray-300 hover:bg-gray-200 transition-all py-1.5 px-2 rounded-lg">
+          <button
+            className="flex gap-1 text-sm items-center bg-gray-100 border border-gray-300 hover:bg-gray-200 transition-all py-1.5 px-2 rounded-lg"
+            onClick={handleFav}
+          >
             <Heart weight="regular" size={20} />
             {item.likes !== "0" && item.likes}
           </button>
