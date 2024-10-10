@@ -28,13 +28,10 @@ export default function Twit({ item, twitType = "main" }) {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["mainPageTwits"],
+        queryKey: "", //boş verdim çünkü like i yakalayamıyordum. şu an sorun yok çalışıyor like.
       });
     },
   });
-
-  // twitType === "main" ? ["mainPageTwits"] : ["twitDetail", String(item.id)]  ["userTwits", item.nickname]
-  // bununda gelmesi gerekiyor.
 
   const handleFav = () => {
     const favTwit = {
