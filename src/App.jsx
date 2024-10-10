@@ -1,6 +1,5 @@
 import "./App.css";
 import { Switch, Route } from "react-router-dom";
-import PageLayout from "./components/layout/PageLayout";
 import Login from "./components/body/Login";
 import Signup from "./components/body/Signup";
 import Header from "./components/headers/Header";
@@ -9,6 +8,7 @@ import { UserContextProvider } from "./context/UserContextProvider";
 import PrivateRoute from "./private/PrivateRoute";
 import UserTwits from "./components/body/UserTwits";
 import HomePage from "./components/body/HomePage";
+import TwitDetail from "./components/body/TwitDetail";
 
 function App() {
   return (
@@ -30,7 +30,7 @@ function App() {
             <UserTwits />
           </Route>
           <PrivateRoute path="/detail/:twitId">
-            <PageLayout>Twit detail</PageLayout>
+            <TwitDetail />
           </PrivateRoute>
         </Switch>
 

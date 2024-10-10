@@ -2,6 +2,7 @@ import Twit from "./Twit";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import PageLayout from "../layout/PageLayout";
+import NewTwit from "./NewTwit";
 
 export default function HomePage() {
   const { data } = useQuery({
@@ -12,9 +13,14 @@ export default function HomePage() {
 
   return (
     <PageLayout>
-      {data
-        ? data.data.data.map((twit) => <Twit key={twit.id} item={twit} />)
-        : "yükleniyor"}
+      <div className="top-20 mb-6 mx-0 sm:-mx-8">
+        <NewTwit />
+      </div>
+      <div className="bg-white rounded-xl shadow-xl">
+        {data
+          ? data.data.data.map((twit) => <Twit key={twit.id} item={twit} />)
+          : "yükleniyor"}
+      </div>
     </PageLayout>
   );
 }
