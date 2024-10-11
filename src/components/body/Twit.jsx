@@ -3,6 +3,7 @@ import {
   Heart,
   ChatTeardropText,
   DotsThreeOutline,
+  Trash,
 } from "@phosphor-icons/react";
 import { UserContext } from "../../context/UserContextProvider";
 import { useContext } from "react";
@@ -33,12 +34,40 @@ export default function Twit({ item, twitType = "main" }) {
     },
   });
 
+  // twitType === "main" ? ["mainPageTwits"] : ["twitDetail",${item.id}]
+
+  const mutationDelete = useMutation({
+    mutationFn: (item) => {
+      return axios.delete(
+        `https://kiwitter-node-77f5acb427c1.herokuapp.com/twits/${item.id}`,
+        item,
+        {
+          headers: {
+            Authorization: localStorage.getItem("kiwitter_user"),
+          },
+        }
+      );
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: "",
+      });
+    },
+  });
+
   const handleFav = () => {
     const favTwit = {
       user_id: String(user.id),
     };
     mutation.mutate(favTwit);
   };
+
+  const handleTwitDelete = () => {
+    mutationDelete.mutate(item);
+    console.log(item);
+    console.log(user);
+  };
+
   return (
     <div
       key={item.author_id}
@@ -49,6 +78,7 @@ export default function Twit({ item, twitType = "main" }) {
       <div className="rounded-full bg-gray-200 text-gray-600 font-black text-2xl text-center p-6 size-20 shrink-0">
         {item.name.split(" ").map((a) => a[0])}
       </div>
+
       <div>
         <Link to={`/profile/${item.nickname}`} className="flex gap-2 pt-1">
           <span className="font-bold">{item.name}</span>
@@ -77,7 +107,32 @@ export default function Twit({ item, twitType = "main" }) {
               </Link>
             </>
           )}
+          {user ? (
+            user.role === "ADMIN" ? (
+              <button onClick={handleTwitDelete}>
+                <Trash size={20} />
+              </button>
+            ) : user.id === item.author_id ? (
+              <button onClick={handleTwitDelete}>
+                <Trash size={20} />
+              </button>
+            ) : (
+              ""
+            )
+          ) : (
+            ""
+          )}
         </div>
+        <p className="font-bold text-gray-600 text-xs">
+          {new Date(item.createdat).toLocaleDateString("tr-TR", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+          })}
+        </p>
       </div>
     </div>
   );
