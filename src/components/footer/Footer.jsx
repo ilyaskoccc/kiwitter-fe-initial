@@ -18,22 +18,34 @@ const Footer = () => {
             <div className="mt-6 md:mt-0">
               <ul className="flex space-x-6">
                 <li>
-                  <a href="#" className="text-gray-400 hover:text-white">
+                  <a
+                    href="https://ilyaskoc.vercel.app/"
+                    className="text-gray-400 hover:text-white"
+                  >
                     About
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-gray-400 hover:text-white">
+                  <a
+                    href="https://ilyaskoc.vercel.app/"
+                    className="text-gray-400 hover:text-white"
+                  >
                     Terms of Service
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-gray-400 hover:text-white">
+                  <a
+                    href="https://ilyaskoc.vercel.app/"
+                    className="text-gray-400 hover:text-white"
+                  >
                     Privacy Policy
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="text-gray-400 hover:text-white">
+                  <a
+                    href="https://ilyaskoc.vercel.app/"
+                    className="text-gray-400 hover:text-white"
+                  >
                     Contact Us
                   </a>
                 </li>
