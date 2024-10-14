@@ -5,6 +5,7 @@ import PageLayout from "../layout/PageLayout";
 import NewTwit from "./NewTwit";
 import { UserContext } from "../../context/UserContextProvider";
 import { useContext } from "react";
+import Search from "./Search";
 
 export default function HomePage() {
   const { data } = useQuery({
@@ -13,7 +14,12 @@ export default function HomePage() {
       axios.get("https://kiwitter-node-77f5acb427c1.herokuapp.com/twits"),
   });
 
-  const { user } = useContext(UserContext);
+  const { user, search } = useContext(UserContext);
+
+  const filteredUser =
+    data?.data?.data?.filter((user) =>
+      user.name.toLowerCase().includes(search.toLowerCase())
+    ) || [];
 
   return (
     <PageLayout>
@@ -25,8 +31,14 @@ export default function HomePage() {
         ""
       )}
       <div className="bg-white rounded-xl shadow-xl">
-        {data ? (
-          data.data.data.map((twit) => <Twit key={twit.id} item={twit} />)
+        {search.length === 0 ? (
+          data ? (
+            data.data.data.map((twit) => <Twit key={twit.id} item={twit} />)
+          ) : (
+            <div className="p-6 text-center">Yükleniyor</div>
+          )
+        ) : data ? (
+          filteredUser?.map((user) => <Search key={user.id} item={user} />)
         ) : (
           <div className="p-6 text-center">Yükleniyor</div>
         )}

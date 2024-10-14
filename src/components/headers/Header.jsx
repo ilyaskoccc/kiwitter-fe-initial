@@ -3,10 +3,10 @@ import logo from "../../../public/kiwitter.png";
 import login from "../../../public/login.png";
 import logout from "../../../public/logout.png";
 import { UserContext } from "../../context/UserContextProvider";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { toast } from "react-toastify";
 export default function Header() {
-  const { user, setUser } = useContext(UserContext);
+  const { user, setUser, search, setSearch } = useContext(UserContext);
 
   const handleLogout = () => {
     localStorage.removeItem("kiwitter_user");
@@ -34,9 +34,19 @@ export default function Header() {
               <img src={logo} alt="logo" />
             </Link>
           </div>
-          <Link to="/">
-            <div className="text-lg font-bold text-lime-800">Home Page</div>
-          </Link>
+
+          <div className="text-lg font-bold text-lime-800">
+            <div className="flex items-center">
+              <input
+                type="text"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="w-full sm:w-64 py-2 px-4 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
+                placeholder="Search Kiwitter..."
+              />
+            </div>
+          </div>
+
           <div className="flex gap-5 items-center">
             {user ? (
               <span className="text-lg font-bold text-lime-800">
