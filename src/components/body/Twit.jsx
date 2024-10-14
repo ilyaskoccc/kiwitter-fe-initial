@@ -86,13 +86,23 @@ export default function Twit({ item, twitType = "main" }) {
         </Link>
         <p className="mt-1">{item.content}</p>
         <div className="flex gap-2 mt-2 items-center">
-          <button
-            className="flex gap-1 text-sm items-center bg-gray-100 border border-gray-300 hover:bg-gray-200 transition-all py-1.5 px-2 rounded-lg"
-            onClick={handleFav}
-          >
-            <Heart weight="regular" size={20} />
-            {item.likes !== "0" && item.likes}
-          </button>
+          {user ? (
+            <button
+              className="flex gap-1 text-sm items-center bg-gray-100 border border-gray-300 hover:bg-gray-200 transition-all py-1.5 px-2 rounded-lg"
+              onClick={handleFav}
+            >
+              <Heart weight="regular" size={20} />
+              {item.likes !== "0" && item.likes}
+            </button>
+          ) : (
+            <Link
+              to={`/detail/${item.id}`}
+              className="flex gap-1 text-sm items-center bg-gray-100 border border-gray-300 hover:bg-gray-200 transition-all py-1.5 px-2 rounded-lg"
+            >
+              <Heart weight="regular" size={20} />
+              {item.likes !== "0" && item.likes}
+            </Link>
+          )}
           {twitType === "main" && (
             <>
               <Link
