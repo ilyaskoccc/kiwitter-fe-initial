@@ -39,7 +39,7 @@ export default function Signup() {
       })
       .catch((error) =>
         error.response.status === 400
-          ? toast.error("Böyle  Bir kullanıcı var", {
+          ? toast.error("This user already exists, try another one.", {
               position: "top-right",
               autoClose: 5000,
               hideProgressBar: false,
