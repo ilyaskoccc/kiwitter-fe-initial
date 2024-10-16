@@ -14,10 +14,16 @@ export default function HomePage() {
       axios.get("https://kiwitter-node-77f5acb427c1.herokuapp.com/twits"),
   });
 
+  const { data: allUsers } = useQuery({
+    queryKey: ["kiwitterUsers"],
+    queryFn: () =>
+      axios.get("https://kiwitter-node-77f5acb427c1.herokuapp.com/users"),
+  });
+
   const { user, search } = useContext(UserContext);
 
   const filteredUser =
-    data?.data?.data?.filter((user) =>
+    allUsers?.data?.data?.filter((user) =>
       user.name.toLowerCase().includes(search.toLowerCase())
     ) || [];
 
@@ -37,8 +43,12 @@ export default function HomePage() {
           ) : (
             <div className="p-6 text-center">Yükleniyor</div>
           )
-        ) : data ? (
-          filteredUser?.map((user) => <Search key={user.id} item={user} />)
+        ) : allUsers ? (
+          filteredUser.length === 0 ? (
+            <div className="p-6 text-center">{`Böyle bir kullanıcı bulunamadı. Belki de yanlış arıyorsunuz. :)`}</div>
+          ) : (
+            filteredUser?.map((user) => <Search key={user.id} item={user} />)
+          )
         ) : (
           <div className="p-6 text-center">Yükleniyor</div>
         )}

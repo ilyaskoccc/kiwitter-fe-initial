@@ -46,23 +46,27 @@ export default function NewTwit({ replyTo = null }) {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-xl p-7 pb-6 pr-6">
-      <p className="text-xl">Ne düşünüyorsun?</p>
+    <div className="bg-white rounded-lg shadow-md p-4">
+      <p className="text-base font-semibold text-gray-800 mb-2">
+        Hey Kiwitterlı! 🎉 Ne düşünüyorsun? Hadi, düşüncelerini paylaş! Belki
+        birlikte daha eğlenceli hale getirebiliriz! 🤔✨
+      </p>
       <form onSubmit={handleSubmit(sendTwit)}>
         <textarea
           {...register("content")}
-          className="w-full h-24 rounded-lg border border-gray-300 block mt-2 mb-3 p-4"
+          className="w-full h-20 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-lime-500 transition duration-200 ease-in-out block mt-1 mb-2 p-2 text-sm resize-none"
+          placeholder="Düşüncelerini buraya yaz..."
         ></textarea>
-        <div className="flex gap-2 items-center justify-end">
+        <div className="flex items-center justify-between">
           <span
-            className={`text-sm font-bold px-2 ${
-              contentText.length > 120 ? "text-red-500" : "text-black/70"
+            className={`text-xs font-medium ${
+              contentText.length > 160 ? "text-red-500" : "text-gray-600"
             }`}
           >
-            {160 - contentText.length}
+            {160 - contentText.length} karakter kaldı
           </span>
           <button
-            className="h-10 px-5 rounded-lg bg-lime-600 text-white disabled:opacity-70 disabled:cursor-not-allowed"
+            className="h-8 px-4 rounded-md bg-lime-600 text-white font-medium transition duration-200 ease-in-out hover:bg-lime-700 disabled:opacity-70 disabled:cursor-not-allowed text-sm"
             disabled={contentText.length === 0 || contentText.length > 160}
           >
             Gönder
