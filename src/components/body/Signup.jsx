@@ -37,17 +37,28 @@ export default function Signup() {
           history.push("/login");
         }, 2000);
       })
-      .catch(() =>
-        toast.error("The account could not be created.", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        })
+      .catch((error) =>
+        error.response.status === 400
+          ? toast.error("Böyle  Bir kullanıcı var", {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            })
+          : toast.error("The account could not be created.", {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            })
       );
   }
 
