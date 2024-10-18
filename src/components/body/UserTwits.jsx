@@ -19,7 +19,11 @@ export default function UserTwits() {
     <PageLayout>
       <div className="bg-white rounded-xl shadow-xl">
         {isSuccess ? (
-          data.data.data.map((twit) => <Twit key={twit.id} item={twit} />)
+          data.data.data.length === 0 ? (
+            <div className="p-6 text-center">Henüz twit yok.</div>
+          ) : (
+            data.data.data.map((twit) => <Twit key={twit.id} item={twit} />)
+          )
         ) : (
           <div className="p-6 text-center">Yükleniyor</div>
         )}

@@ -9,6 +9,7 @@ import PrivateRoute from "./private/PrivateRoute";
 import UserTwits from "./components/body/UserTwits";
 import HomePage from "./components/body/HomePage";
 import TwitDetail from "./components/body/TwitDetail";
+import Populers from "./components/body/Populers";
 
 function App() {
   return (
@@ -28,6 +29,9 @@ function App() {
           </Route>
           <Route path="/profile/:nickname">
             <UserTwits />
+          </Route>
+          <Route path="/populers">
+            <Populers />
           </Route>
           <PrivateRoute path="/detail/:twitId">
             <TwitDetail />

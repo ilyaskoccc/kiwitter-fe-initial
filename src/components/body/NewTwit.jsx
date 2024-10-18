@@ -5,7 +5,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 
 export default function NewTwit({ replyTo = null }) {
-  const { register, handleSubmit, watch } = useForm({
+  const { register, handleSubmit, watch, reset } = useForm({
     defaultValues: {
       content: "",
     },
@@ -43,6 +43,8 @@ export default function NewTwit({ replyTo = null }) {
       replyTo: replyTo,
     };
     mutation.mutate(newTwitData);
+
+    reset();
   };
 
   return (
