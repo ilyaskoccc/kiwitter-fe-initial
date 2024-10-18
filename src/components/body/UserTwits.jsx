@@ -3,9 +3,13 @@ import axios from "axios";
 import PageLayout from "../layout/PageLayout";
 import Twit from "./Twit";
 import { useQuery } from "@tanstack/react-query";
+import { UserContext } from "../../context/UserContextProvider";
+import { useContext } from "react";
 
 export default function UserTwits() {
   let { nickname } = useParams();
+
+  const { setSearch } = useContext(UserContext);
 
   const { data, isSuccess } = useQuery({
     queryKey: ["userTwits", nickname],
@@ -14,6 +18,8 @@ export default function UserTwits() {
         `https://kiwitter-node-77f5acb427c1.herokuapp.com/users/${nickname}/twits`
       ),
   });
+
+  setSearch("");
 
   return (
     <PageLayout>

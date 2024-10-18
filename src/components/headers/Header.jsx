@@ -42,7 +42,9 @@ export default function Header() {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 className="w-full py-3 px-5 pr-12 rounded-full border border-gray-300 shadow-lg transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500"
-                placeholder="Search Kiwitter..."
+                placeholder={
+                  search.length === 0 ? "Search Kiwitter..." : search
+                }
               />
               <span className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400 hover:text-green-500">
                 <svg
